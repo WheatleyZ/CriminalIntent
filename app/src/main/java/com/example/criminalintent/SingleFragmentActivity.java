@@ -1,15 +1,20 @@
 package com.example.criminalintent;
 
+import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-//import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 
-public class CrimeActivity extends /*AppCompatActivity*//*FragmentActivity*/SingleFragmentActivity {
+/**
+ * Created by 毛毛龍 on 2016/10/10 0010.
+ */
 
-    /*@Override
-    protected void onCreate(Bundle savedInstanceState) {
+public abstract class SingleFragmentActivity extends FragmentActivity {
+    protected abstract Fragment createFragment();
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fragment);
 
@@ -17,13 +22,8 @@ public class CrimeActivity extends /*AppCompatActivity*//*FragmentActivity*/Sing
         Fragment fragment = fm.findFragmentById(R.id.fragment_container);
 
         if (fragment == null) {
-            fragment = new CrimeFragment();
+            fragment = createFragment();
             fm.beginTransaction().add(R.id.fragment_container, fragment).commit();
         }
-    }*/
-
-    @Override
-    protected Fragment createFragment() {
-        return new CrimeFragment();
     }
 }
