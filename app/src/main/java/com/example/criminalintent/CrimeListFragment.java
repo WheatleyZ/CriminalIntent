@@ -10,8 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
+
+import static android.R.attr.onClick;
 
 /**
  * Created by 毛毛龍 on 2016/10/10 0010.
@@ -42,7 +45,7 @@ public class CrimeListFragment extends Fragment {
         mCrimeRecycleView.setAdapter(mAdapter);
     }
 
-    private class CrimeHolder extends RecyclerView.ViewHolder {
+    private class CrimeHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         //        public TextView mTitleTextView;
         private Crime mCrime;
         private TextView mTitleTextView;
@@ -52,6 +55,7 @@ public class CrimeListFragment extends Fragment {
         public CrimeHolder(View itemView) {
             super(itemView);
 //            mTitleTextView = (TextView) itemView;
+            itemView.setOnClickListener(this);
             mTitleTextView = (TextView) itemView.findViewById(R.id.list_item_crime_title_text_view);
             mDateTextView = (TextView) itemView.findViewById(R.id.list_item_date_text_view);
             mSolvedCheckBox = (CheckBox) itemView.findViewById(R.id.list_item_crime_solved_check_box);
@@ -62,6 +66,11 @@ public class CrimeListFragment extends Fragment {
             mTitleTextView.setText(mCrime.getTitle());
             mDateTextView.setText(mCrime.getDate().toString());
             mSolvedCheckBox.setChecked(mCrime.getSolved());
+        }
+
+        @Override
+        public void onClick(View v) {
+            Toast.makeText(getActivity(), mCrime.getTitle()+" Clicked!", Toast.LENGTH_SHORT).show();
         }
     }
 
